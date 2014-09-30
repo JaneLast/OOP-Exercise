@@ -1,5 +1,6 @@
 require 'pry'
 require 'date'
+# Creates a person
 class Person
   attr_accessor :first_name, :surname, :dob, :fullname
   attr_reader :emails, :phone_numbers
@@ -14,7 +15,7 @@ class Person
     @emails = []
     @phone_numbers = []
    end
-  # Add email and number methods
+  # Add/remove email and number methods
   def add_email(input)
     emails.push input
   end
@@ -30,18 +31,49 @@ class Person
   def remove_phone(input)
     phone_numbers.delete_at input
   end
+  
   def to_s
     "#{@fullname} was born on #{dob}. \n Their email addresses are: #{emails}. \n Their phone numbers are #{phone_numbers}"
   end   
   
   def print_details
-    puts "#{@fullname}\n#{'-' * fullname.length}\n Date of Birth: #{@dob.strftime("%d %B %Y")}\n \n Email Addresses: \n- #{emails.join("\n- ")}\n \n Phone Numbers: \n- #{phone_numbers.join("\n- ")}"
+    puts "#{@fullname}\n"
+    puts "#{'-' * fullname.length}"
+    puts "Date of Birth: #{@dob.strftime("%d %B %Y")}\n\n\n"
+    puts "Email Addresses:"
+    @emails.each do |e|
+      puts '-'+e 
+    end
+    puts "\n Phone Numbers: "
+    @phone_numbers.each do |p|
+      puts '-'+p
+    end
+    return nil
   end
-class FamilyMember < Person
-  def initialize
+  
+  
+class FamilyMember < Person 
+    def initialize
     super
-    @relationship
+    attr_accessor :relationship
   end
+end
+
+class AddressBook
+  def initialize
+    @book= []
+  end
+  
+  def add(p)
+    @book.push p
+  end
+  
+  def list
+    puts "Address Book \n "
+    puts '-------------'
+    
+  end
+  
 end
  binding.pry 
       
