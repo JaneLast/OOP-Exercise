@@ -53,10 +53,13 @@ class Person
   
   
 class FamilyMember < Person 
+    attr_accessor :relationship
+    
     def initialize
     super
-    attr_accessor :relationship
-  end
+    @relationship = nil
+    end
+  
 end
 
 class AddressBook
@@ -65,13 +68,20 @@ class AddressBook
   end
   
   def add(p)
-    @book.push p
-  end
+    if p.is_a?Person||FamilyMember
+      @book.push p
+     else
+       raise 'This is an error!!!'
+    end
+   end
   
   def list
     puts "Address Book \n "
     puts '-------------'
-    
+    @book.each_with_index do |p, i|
+      puts "Entry #{i+1}: #{p.fullname}"
+      return nil
+    end
   end
   
 end
