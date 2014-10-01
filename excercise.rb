@@ -42,11 +42,11 @@ class Person
     puts "Date of Birth: #{@dob.strftime("%d %B %Y")}\n\n\n"
     puts "Email Addresses:"
     @emails.each do |e|
-      puts '-'+e 
+      puts '- #{e}' 
     end
     puts "\n Phone Numbers: "
     @phone_numbers.each do |p|
-      puts '-'+p
+      puts '- #{p}'
     end
     return nil
   end
@@ -55,9 +55,9 @@ class Person
 class FamilyMember < Person 
     attr_accessor :relationship
     
-    def initialize
+    def initialize(relationship="Relative", *args)
     super
-    @relationship = nil
+    @relationship = relationship
     end
   
 end
@@ -68,10 +68,10 @@ class AddressBook
   end
   
   def add(p)
-    if p.is_a?Person||FamilyMember
+    if p.class == Person||FamilyMember
       @book.push p
      else
-       raise 'This is an error!!!'
+       raise 'Enter a valid person'
     end
    end
   
